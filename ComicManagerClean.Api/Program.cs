@@ -11,7 +11,6 @@ builder.Host.UseSerilog((context, configuration) =>
 
 // Add services to the container.
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -30,11 +29,14 @@ app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
-app.MapControllers();
-
 // Adding custom exception handling middleware
 app.UseExceptionHandleMiddleware();
+
+app.MapGet("/weatherforecast", () =>
+{
+    return "Hello World!";
+})
+.WithName("GetWeatherForecast")
+.WithOpenApi();
 
 app.Run();
