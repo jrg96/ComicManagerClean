@@ -1,6 +1,13 @@
 using ComicManagerClean.Api.Middleware;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Serilog configuration
+builder.Host.UseSerilog((context, configuration) =>
+{
+    configuration.ReadFrom.Configuration(context.Configuration);
+});
 
 // Add services to the container.
 
@@ -17,6 +24,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Add Serilog configuration
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 

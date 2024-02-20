@@ -1,4 +1,5 @@
 ﻿using ComicManagerClean.Contracts.Common;
+using Serilog;
 
 namespace ComicManagerClean.Api.Middleware;
 
@@ -25,6 +26,8 @@ public class ExceptionHandleMiddleware
 
     private async Task HandleException(Exception ex, HttpContext httpContext)
     {
+        Log.Error(ex, "Error Happened!");
+
         // Return internal server error
         httpContext.Response.StatusCode = 500;
         await httpContext.Response.WriteAsJsonAsync(new TaskResult<string>()
