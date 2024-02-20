@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicManagerClean", "ComicManagerClean\ComicManagerClean\ComicManagerClean.csproj", "{AF04AE37-1A2F-4623-98D0-203572C61B53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicManagerClean", "ComicManagerClean\ComicManagerClean\ComicManagerClean.csproj", "{AF04AE37-1A2F-4623-98D0-203572C61B53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicManagerClean.Client", "ComicManagerClean\ComicManagerClean.Client\ComicManagerClean.Client.csproj", "{E1364BAD-381C-4F9A-8EE0-F47B0D704450}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicManagerClean.Client", "ComicManagerClean\ComicManagerClean.Client\ComicManagerClean.Client.csproj", "{E1364BAD-381C-4F9A-8EE0-F47B0D704450}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicManagerClean.Domain", "ComicManagerClean.Domain\ComicManagerClean.Domain.csproj", "{19E65CD4-90A6-4DF4-BF48-4FAE82A0AFCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicManagerClean.Domain", "ComicManagerClean.Domain\ComicManagerClean.Domain.csproj", "{19E65CD4-90A6-4DF4-BF48-4FAE82A0AFCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicManagerClean.Application", "ComicManagerClean.Application\ComicManagerClean.Application.csproj", "{C47DFAEC-455B-4648-91FC-760B5FA3D132}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicManagerClean.Application", "ComicManagerClean.Application\ComicManagerClean.Application.csproj", "{C47DFAEC-455B-4648-91FC-760B5FA3D132}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicManagerClean.Infrastructure", "ComicManagerClean.Infrastructure\ComicManagerClean.Infrastructure.csproj", "{A1EFAD15-16B0-436A-ACEF-14B535EDD087}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicManagerClean.Infrastructure", "ComicManagerClean.Infrastructure\ComicManagerClean.Infrastructure.csproj", "{A1EFAD15-16B0-436A-ACEF-14B535EDD087}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{F6E14AEB-ACA9-4F21-8597-5B401D7FF5C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicManagerClean.Api", "ComicManagerClean.Api\ComicManagerClean.Api.csproj", "{6EAD93F4-EA52-4663-ADF4-08923C7B510A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicManagerClean.Api", "ComicManagerClean.Api\ComicManagerClean.Api.csproj", "{6EAD93F4-EA52-4663-ADF4-08923C7B510A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicManagerClean.Contracts", "ComicManagerClean.Contracts\ComicManagerClean.Contracts.csproj", "{FE02E9F5-31D2-42DD-8DE3-3585137D3BDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{6EAD93F4-EA52-4663-ADF4-08923C7B510A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EAD93F4-EA52-4663-ADF4-08923C7B510A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EAD93F4-EA52-4663-ADF4-08923C7B510A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE02E9F5-31D2-42DD-8DE3-3585137D3BDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE02E9F5-31D2-42DD-8DE3-3585137D3BDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE02E9F5-31D2-42DD-8DE3-3585137D3BDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE02E9F5-31D2-42DD-8DE3-3585137D3BDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{AF04AE37-1A2F-4623-98D0-203572C61B53} = {F6E14AEB-ACA9-4F21-8597-5B401D7FF5C2}
 		{E1364BAD-381C-4F9A-8EE0-F47B0D704450} = {F6E14AEB-ACA9-4F21-8597-5B401D7FF5C2}
 		{6EAD93F4-EA52-4663-ADF4-08923C7B510A} = {F6E14AEB-ACA9-4F21-8597-5B401D7FF5C2}
+		{FE02E9F5-31D2-42DD-8DE3-3585137D3BDD} = {F6E14AEB-ACA9-4F21-8597-5B401D7FF5C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CFA0FDE-7EC4-47A5-8628-812B35B44F9C}
