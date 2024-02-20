@@ -1,3 +1,5 @@
+using ComicManagerClean.Api.Middleware;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -21,5 +23,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Adding custom exception handling middleware
+app.UseExceptionHandleMiddleware();
 
 app.Run();
