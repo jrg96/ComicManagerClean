@@ -1,5 +1,6 @@
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
+using Carter;
 using ComicManagerClean.Api.Middleware;
 using ComicManagerClean.Api.Swagger;
 using Microsoft.Extensions.Options;
@@ -15,6 +16,7 @@ builder.Host.UseSerilog((context, configuration) =>
 });
 
 // Add services to the container.
+builder.Services.AddCarter();
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 builder.Services
     .AddApiVersioning(options =>
@@ -38,23 +40,11 @@ builder.Services.AddSwaggerGen(option =>
 
 var app = builder.Build();
 
-// Serilog, Exception MiddleWare
-var versionSet = app.NewApiVersionSet()
-    .HasApiVersion(1)
-    .ReportApiVersions()
-    .Build();
+// Serilog, Exception MiddleWare, Carter
 app.UseSerilogRequestLogging();
 app.UseExceptionHandleMiddleware();
-
+app.MapCarter();
 app.UseHttpsRedirection();
-
-app.MapGet("/api/v{version:apiVersion}/weatherforecast", () =>
-{
-    return "Hello World!";
-})
-.WithApiVersionSet(versionSet)
-.MapToApiVersion(1);
-
 
 // Configure the HTTP request pipeline.
 // NOTE: Swagger config should come after all endpoints have been defined
