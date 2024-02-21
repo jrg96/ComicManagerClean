@@ -1,5 +1,4 @@
 using Asp.Versioning;
-using Asp.Versioning.Conventions;
 using Carter;
 using ComicManagerClean.Api.Middleware;
 using ComicManagerClean.Api.Swagger;
