@@ -13,6 +13,10 @@
     <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.0.0" />
     <PackageReference Include="Carter" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
@@ -24,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ComicManagerClean.Application\ComicManagerClean.Application.csproj" />
     <ProjectReference Include="..\ComicManagerClean.Contracts\ComicManagerClean.Contracts.csproj" />
+    <ProjectReference Include="..\ComicManagerClean.Infrastructure\ComicManagerClean.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

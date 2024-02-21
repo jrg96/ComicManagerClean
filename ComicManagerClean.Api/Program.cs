@@ -2,6 +2,8 @@ using Asp.Versioning;
 using Carter;
 using ComicManagerClean.Api.Middleware;
 using ComicManagerClean.Api.Swagger;
+using ComicManagerClean.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -15,6 +17,8 @@ builder.Host.UseSerilog((context, configuration) =>
 });
 
 // Add services to the container.
+builder.Services.AddDbContext<ComicManagerDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ComicDb")));
 builder.Services.AddCarter();
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 builder.Services
