@@ -2,6 +2,7 @@ using Asp.Versioning;
 using Carter;
 using ComicManagerClean.Api.Middleware;
 using ComicManagerClean.Api.Swagger;
+using ComicManagerClean.Application.Extensions;
 using ComicManagerClean.Infrastructure.Context;
 using ComicManagerClean.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,7 @@ builder.Services
         options.SubstituteApiVersionInUrl = true;
     });
 builder.Services.UseInfrastructureProviders();
+builder.Services.UseApplicationProviders();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

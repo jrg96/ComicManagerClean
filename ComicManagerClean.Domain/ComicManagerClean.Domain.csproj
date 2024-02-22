@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Aggregates\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>
