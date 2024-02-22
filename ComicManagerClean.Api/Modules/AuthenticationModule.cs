@@ -1,8 +1,10 @@
 ﻿using Asp.Versioning;
 using Asp.Versioning.Builder;
 using Carter;
+using ComicManagerClean.Application.User.Commands;
 using ComicManagerClean.Contracts.Authentication;
 using ComicManagerClean.Contracts.Common;
+using MediatR;
 
 namespace ComicManagerClean.Api.Modules;
 
@@ -41,12 +43,19 @@ public class AuthenticationModule : CarterModule
     /*
      * Endpoint functions
      */
-    public async Task<TaskResult<string>> Register(SignUpRequest request)
+    public async Task<TaskResult<string>> Register(IMediator mediator, SignUpRequest request)
     {
+        var result = await mediator.Send(new CreateUserCommand(
+            request.FirstName,
+            request.LastName,
+            request.Email,
+            request.Password
+        ));
+
         return new TaskResult<string>()
         {
             ErrorList = new List<string>(),
-            Successful = true,
+            Successful = result.IsSuccess,
             Data = "Hello World!"
         };
     }

@@ -17,7 +17,7 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
 
     public async Task Add(T entity)
     {
-        _dbSet.Add(entity);
+        await _dbSet.AddAsync(entity);
     }
 
     public async Task Remove(T entity)
