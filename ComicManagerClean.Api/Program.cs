@@ -3,6 +3,7 @@ using Carter;
 using ComicManagerClean.Api.Middleware;
 using ComicManagerClean.Api.Swagger;
 using ComicManagerClean.Infrastructure.Context;
+using ComicManagerClean.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Serilog;
@@ -33,6 +34,7 @@ builder.Services
         options.GroupNameFormat = "'v'VVV";
         options.SubstituteApiVersionInUrl = true;
     });
+builder.Services.UseInfrastructureProviders();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
