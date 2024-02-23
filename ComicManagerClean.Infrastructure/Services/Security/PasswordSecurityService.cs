@@ -5,20 +5,13 @@ namespace ComicManagerClean.Infrastructure.Services.Security;
 
 public class PasswordSecurityService : IPasswordSecurityService
 {
+    private readonly int keySize = 32;
+    private readonly int iterations = 350000;
+    private readonly HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
+
     public (string hashedPassword, byte[] salt) EncryptPassword(string password)
     {
-        const int keySize = 64;
         byte[] salt = RandomNumberGenerator.GetBytes(keySize);
-
-        return (EncryptPassword(password, salt), salt);
-    }
-
-    public string EncryptPassword(string password, byte[] salt)
-    {
-        const int keySize = 64;
-        const int iterations = 350000;
-        HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
-
         var hash = Rfc2898DeriveBytes.Pbkdf2(
             Encoding.UTF8.GetBytes(password),
             salt,
@@ -26,6 +19,12 @@ public class PasswordSecurityService : IPasswordSecurityService
             hashAlgorithm,
             keySize);
 
-        return Convert.ToHexString(hash);
+        return (Convert.ToHexString(hash), salt);
+    }
+
+    public bool VerifyPassword(string password, string hash, byte[] salt)
+    {
+        var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(password, salt, iterations, hashAlgorithm, keySize);
+        return CryptographicOperations.FixedTimeEquals(hashToCompare, Convert.FromHexString(hash));
     }
 }
