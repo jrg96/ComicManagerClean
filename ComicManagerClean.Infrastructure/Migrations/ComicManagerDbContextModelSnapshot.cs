@@ -47,6 +47,11 @@ namespace ComicManagerClean.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("Salt")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varbinary(128)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComicManagerClean.Infrastructure.Migrations
 {
     [DbContext(typeof(ComicManagerDbContext))]
-    [Migration("20240221205925_InitialMigration")]
+    [Migration("20240223065636_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -49,6 +49,11 @@ namespace ComicManagerClean.Infrastructure.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Salt")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varbinary(128)");
 
                     b.HasKey("Id");
 

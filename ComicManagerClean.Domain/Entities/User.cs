@@ -18,4 +18,7 @@ public class User
     public string Email { get; set; }
 
     public string Password { get; set; }
+
+    [MaxLength(128)]
+    public byte[] Salt { get; set; }
 }

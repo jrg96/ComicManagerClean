@@ -15,7 +15,7 @@ public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
         RuleFor(command => command.Password)
             .NotEmpty()
             .NotNull()
-            .MinimumLength(20)
+            .Length(10, 32)
             .Must(IsValidPassword);
 
         RuleFor(command => command.Name)
