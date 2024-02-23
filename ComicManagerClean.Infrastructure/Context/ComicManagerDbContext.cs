@@ -17,4 +17,9 @@ public class ComicManagerDbContext : DbContext, IComicManagerDbContext
     {
         base.OnConfiguring(optionsBuilder);
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ComicManagerDbContext).Assembly);
+    }
 }
