@@ -1,4 +1,5 @@
 ﻿using ComicManagerClean.Contracts.Common;
+using FluentValidation;
 using Serilog;
 
 namespace ComicManagerClean.Api.Middleware;
@@ -26,14 +27,30 @@ public class ExceptionHandleMiddleware
 
     private async Task HandleException(Exception ex, HttpContext httpContext)
     {
+        List<string> errors = new List<string>();
         Log.Error(ex, "Error Happened!");
 
-        // Return internal server error
-        httpContext.Response.StatusCode = 500;
+        // For Validation errors regarding Command/Query params
+        // return a bad request
+        if (ex is ValidationException)
+        {
+            httpContext.Response.StatusCode = 400;
+            ValidationException validationException = (ValidationException)ex;
+
+            validationException.Errors
+                .ToList()
+                .ForEach(error => errors.Add($"{error.PropertyName} {error.ErrorMessage}"));
+        }
+        else
+        {
+            httpContext.Response.StatusCode = 500;
+            errors.Add($"{ex.Message} {ex.StackTrace}");
+        }
+
         await httpContext.Response.WriteAsJsonAsync(new TaskResult<string>()
         {
             Successful = false,
-            ErrorList = new List<string>() { ex.StackTrace },
+            ErrorList = errors,
             Data = string.Empty
         }) ;
     }
