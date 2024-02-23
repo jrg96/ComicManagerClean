@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using ComicManagerClean.Application.Common.Behaviors;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -14,7 +16,7 @@ public static class ApplicationExtensions
         {
             configuration.RegisterServicesFromAssembly(assembly);
         });
-
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandQueryValidationBehavior<,>));
         services.AddValidatorsFromAssembly(assembly);
 
         return services;
