@@ -14,7 +14,7 @@ public abstract class GenericQueryRepository<T> : IGenericQueryRepository<T> whe
         _context = context;
     }
 
-    protected IEnumerable<T> Find(ISpecification<T> specification)
+    protected IQueryable<T> Find(ISpecification<T> specification)
     {
         return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), specification);
     }
