@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Specifications\" />
   </ItemGroup>
 
   <ItemGroup>
