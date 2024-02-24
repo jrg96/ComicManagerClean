@@ -1,7 +1,7 @@
-﻿using ComicManagerClean.Domain.Repositories.Queries;
+﻿using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
+using ComicManagerClean.Domain.Repositories.Queries;
 using ComicManagerClean.Infrastructure.Context;
-using ComicManagerClean.Infrastructure.Specifications;
-using ComicManagerClean.Infrastructure.Specifications.Contracts;
 
 namespace ComicManagerClean.Infrastructure.Repositories.Queries;
 
@@ -16,6 +16,6 @@ public abstract class GenericQueryRepository<T> : IGenericQueryRepository<T> whe
 
     protected IQueryable<T> Find(ISpecification<T> specification)
     {
-        return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), specification);
+        return SpecificationEvaluator.Default.GetQuery(_context.Set<T>().AsQueryable(), specification);
     }
 }

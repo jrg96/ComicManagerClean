@@ -1,7 +1,6 @@
-﻿using ComicManagerClean.Infrastructure.Specifications.Contracts;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace ComicManagerClean.Infrastructure.Specifications;
+namespace ComicManagerClean.Infrastructure.Specifications.Deprecated.Contracts;
 
 public class SpecificationEvaluator<TEntity> where TEntity : class
 {

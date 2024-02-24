@@ -1,7 +1,7 @@
 ﻿
 using System.Linq.Expressions;
 
-namespace ComicManagerClean.Infrastructure.Specifications.Contracts;
+namespace ComicManagerClean.Infrastructure.Specifications.Deprecated.Contracts;
 
 public interface ISpecification<TEntity> where TEntity : class
 {

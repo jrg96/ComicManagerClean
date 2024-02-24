@@ -1,7 +1,6 @@
-﻿using ComicManagerClean.Infrastructure.Specifications.Contracts;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
-namespace ComicManagerClean.Infrastructure.Specifications;
+namespace ComicManagerClean.Infrastructure.Specifications.Deprecated.Contracts;
 
 public abstract class BaseSpecification<TEntity> : ISpecification<TEntity> where TEntity : class
 {
@@ -23,7 +22,7 @@ public abstract class BaseSpecification<TEntity> : ISpecification<TEntity> where
 
     protected BaseSpecification()
     {
-        
+
     }
 
     protected virtual void AddInclude(Expression<Func<TEntity, object>> include)
