@@ -20,7 +20,8 @@ builder.Host.UseSerilog((context, configuration) =>
 
 // Add services to the container.
 builder.Services.AddDbContext<ComicManagerDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ComicDb")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ComicDb"))
+        .LogTo(Console.WriteLine, LogLevel.Information));
 builder.Services.AddCarter();
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 builder.Services
