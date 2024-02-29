@@ -6,6 +6,7 @@ using ComicManagerClean.Infrastructure.Repositories;
 using ComicManagerClean.Infrastructure.Repositories.Commands;
 using ComicManagerClean.Infrastructure.Repositories.Queries;
 using ComicManagerClean.Infrastructure.Services.Security;
+using ComicManagerClean.Infrastructure.Services.Security.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ComicManagerClean.Infrastructure.Extensions;
@@ -18,6 +19,7 @@ public static class InfrastructureExtensions
         services.AddScoped<IUserQueryRepository, UserQueryRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IPasswordSecurityService, PasswordSecurityService>();
+        services.AddScoped<IJwtTokenService, JwtTokenService>();
 
         return services;
     }

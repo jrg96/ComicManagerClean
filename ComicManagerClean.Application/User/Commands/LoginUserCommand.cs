@@ -4,4 +4,4 @@ namespace ComicManagerClean.Application.User.Commands;
 public record LoginUserCommand(
     string Email
     , string Password
-) : ICommand;
+) : ICommand<Domain.Entities.User>;
