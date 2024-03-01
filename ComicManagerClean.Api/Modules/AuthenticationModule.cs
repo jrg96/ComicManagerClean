@@ -107,6 +107,7 @@ public class AuthenticationModule : CarterModule
             { JwtClaimConstants.USER_ID_CLAIM, result.Value.Id.ToString() },
             { JwtClaimConstants.USER_NAME_CLAIM, result.Value.Name },
             { JwtClaimConstants.USER_LAST_NAME_CLAIM, result.Value.LastName },
+            { JwtClaimConstants.USER_ROLE_CLAIM, result.Value.Role.ToString() },
         };
 
         return TypedResults.Ok(new TaskResult<string>()

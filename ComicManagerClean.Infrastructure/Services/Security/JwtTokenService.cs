@@ -1,4 +1,7 @@
-﻿using ComicManagerClean.Infrastructure.Services.Security.Contracts;
+﻿using ComicManagerClean.Domain.Entities;
+using ComicManagerClean.Domain.Shared.Enums;
+using ComicManagerClean.Infrastructure.Constants;
+using ComicManagerClean.Infrastructure.Services.Security.Contracts;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -36,5 +39,50 @@ public class JwtTokenService : IJwtTokenService
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    public User? ValidateToken(string token, string securityKey)
+    {
+        if (token == null)
+        {
+            return null;
+        }
+
+        JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+        SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey));
+        TokenValidationParameters validationParameters = new TokenValidationParameters 
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = key,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ClockSkew = TimeSpan.Zero,
+        };
+
+
+        try
+        {
+            // If token is not valid, ValidateToken will throw an exception
+            SecurityToken securityToken;
+            handler.ValidateToken(token, validationParameters, out securityToken);
+
+            // If everything is ok, recreate User entity
+            RolesEnum role;
+            JwtSecurityToken jwtToken = (JwtSecurityToken)securityToken;
+            Enum.TryParse(jwtToken.Claims.First(claim => claim.Type == JwtClaimConstants.USER_ROLE_CLAIM).Value, true, out role);
+
+            User user = new User() 
+            {
+                Id = new Guid(jwtToken.Claims.First(claim => claim.Type == JwtClaimConstants.USER_ID_CLAIM).Value),
+                Role = role
+            };
+
+            return user;
+
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
     }
 }
