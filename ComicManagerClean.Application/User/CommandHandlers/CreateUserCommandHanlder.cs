@@ -5,6 +5,7 @@ using ComicManagerClean.Domain.Repositories;
 using ComicManagerClean.Domain.Repositories.Commands;
 using ComicManagerClean.Domain.Repositories.Queries;
 using ComicManagerClean.Domain.Shared;
+using ComicManagerClean.Domain.Shared.Enums;
 
 namespace ComicManagerClean.Application.User.CommandHandlers;
 
@@ -43,7 +44,8 @@ public class CreateUserCommandHanlder : ICommandHandler<CreateUserCommand>
             Name = request.Name,
             LastName = request.LastName,
             Password = hashedPassword,
-            Salt = salt
+            Salt = salt,
+            Role = RolesEnum.User // By default any new user will be a normal user
         });
 
         await _unitOfWork.SaveChangesAsync();

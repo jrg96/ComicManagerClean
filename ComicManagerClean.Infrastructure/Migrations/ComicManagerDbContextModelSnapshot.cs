@@ -46,6 +46,11 @@ namespace ComicManagerClean.Infrastructure.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
                     b.Property<byte[]>("Salt")
                         .IsRequired()
                         .HasMaxLength(128)

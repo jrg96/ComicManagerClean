@@ -25,5 +25,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .Property(user => user.Salt)
             .IsRequired()
             .HasMaxLength(128);
+
+        builder
+            .Property(user => user.Role)
+            .IsRequired()
+            .HasConversion<string>()
+            .HasMaxLength(128);
     }
 }

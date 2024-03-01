@@ -20,7 +20,8 @@ namespace ComicManagerClean.Infrastructure.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Salt = table.Column<byte[]>(type: "varbinary(128)", maxLength: 128, nullable: false)
+                    Salt = table.Column<byte[]>(type: "varbinary(128)", maxLength: 128, nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false)
                 },
                 constraints: table =>
                 {
