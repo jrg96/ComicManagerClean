@@ -1,5 +1,7 @@
 ﻿using ComicManagerClean.Application.Common.Behaviors;
 using FluentValidation;
+using Mapster;
+using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -18,6 +20,12 @@ public static class ApplicationExtensions
         });
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandQueryValidationBehavior<,>));
         services.AddValidatorsFromAssembly(assembly);
+
+        // Configuration for mapster
+        TypeAdapterConfig config = TypeAdapterConfig.GlobalSettings;
+        config.Scan(Assembly.GetExecutingAssembly());
+        services.AddSingleton(config);
+        services.AddScoped<IMapper, ServiceMapper>();
 
         return services;
     }

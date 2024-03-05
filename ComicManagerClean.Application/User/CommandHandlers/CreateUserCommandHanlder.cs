@@ -6,6 +6,7 @@ using ComicManagerClean.Domain.Repositories.Commands;
 using ComicManagerClean.Domain.Repositories.Queries;
 using ComicManagerClean.Domain.Shared;
 using ComicManagerClean.Domain.Shared.Enums;
+using Mapster;
 
 namespace ComicManagerClean.Application.User.CommandHandlers;
 
@@ -37,17 +38,13 @@ public class CreateUserCommandHanlder : ICommandHandler<CreateUserCommand>
         // If everything looks good, encrypt password
         (string hashedPassword, byte[] salt) = _passwordSecurityService.EncryptPassword(request.Password);
 
-        await _userCommandRepository.Add(new Domain.Entities.User()
-        {
-            Id = Guid.NewGuid(),
-            Email = request.Email,
-            Name = request.Name,
-            LastName = request.LastName,
-            Password = hashedPassword,
-            Salt = salt,
-            Role = RolesEnum.User // By default any new user will be a normal user
-        });
+        Domain.Entities.User newUser = request.Adapt<Domain.Entities.User>();
+        newUser.Id = Guid.NewGuid();
+        newUser.Password = hashedPassword;
+        newUser.Salt = salt;
+        newUser.Role = RolesEnum.User; // By default any new user will be a normal user
 
+        await _userCommandRepository.Add(newUser);
         await _unitOfWork.SaveChangesAsync();
         return new CommandResult(true, Error.None);
     }
