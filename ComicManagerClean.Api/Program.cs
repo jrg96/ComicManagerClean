@@ -63,7 +63,7 @@ builder.Services.AddAuthorization(options =>
 
     options.AddPolicy("user_policy_requirement", policy =>
     {
-        policy.AddRequirements(new RoleRequirement(RolesEnum.User));
+        policy.AddRequirements(new RoleRequirement(RolesEnum.User, RolesEnum.Admin));
     });
 });
 

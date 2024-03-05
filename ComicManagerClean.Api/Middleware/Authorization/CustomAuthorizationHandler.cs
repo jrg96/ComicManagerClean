@@ -17,13 +17,13 @@ public class CustomAuthorizationHandler : AuthorizationHandler<RoleRequirement>
         Domain.Entities.User user = (Domain.Entities.User)httpContext.Items["User"];
 
         // Verify if logged in user has the required permissions
-        if (user != null && requirement.Role == user.Role)
+        if (user != null && requirement.Roles.Contains(user.Role))
         {
             context.Succeed(requirement);
             return Task.CompletedTask;
         }
 
-        context.Fail(new AuthorizationFailureReason(this, $" Logged in user is not {requirement.Role}"));
+        context.Fail(new AuthorizationFailureReason(this, $" Logged in user is not {requirement.Roles.ToString()}"));
         return Task.CompletedTask;
     }
 }

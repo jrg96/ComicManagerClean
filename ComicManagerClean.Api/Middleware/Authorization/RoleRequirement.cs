@@ -5,10 +5,10 @@ namespace ComicManagerClean.Api.Middleware.Authorization;
 
 public class RoleRequirement : IAuthorizationRequirement
 {
-    public RolesEnum Role { get; private set; }
+    public RolesEnum[] Roles { get; private set; }
 
-    public RoleRequirement(RolesEnum role)
+    public RoleRequirement(params RolesEnum[] roles)
     {
-        Role = role;
+        Roles = roles;
     }
 }
