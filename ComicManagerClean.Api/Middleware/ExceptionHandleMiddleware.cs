@@ -47,11 +47,10 @@ public class ExceptionHandleMiddleware
             errors.Add($"{ex.Message} {ex.StackTrace}");
         }
 
-        await httpContext.Response.WriteAsJsonAsync(new TaskResult<string>()
+        await httpContext.Response.WriteAsJsonAsync(new TaskResult()
         {
             Successful = false,
-            ErrorList = errors,
-            Data = string.Empty
+            ErrorList = errors
         }) ;
     }
 }

@@ -58,7 +58,7 @@ namespace ComicManagerClean.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Character");
+                    b.ToTable("Characters");
                 });
 
             modelBuilder.Entity("ComicManagerClean.Domain.Entities.CharacterComic", b =>

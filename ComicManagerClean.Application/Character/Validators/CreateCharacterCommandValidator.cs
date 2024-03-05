@@ -21,8 +21,5 @@ public class CreateCharacterCommandValidator : AbstractValidator<CreateCharacter
 
         RuleFor(command => command.DateOfBirth)
             .NotEmpty();
-
-        RuleFor(command => command.CharacterType)
-            .NotEmpty();
     }
 }

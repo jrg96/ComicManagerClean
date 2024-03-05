@@ -12,7 +12,7 @@ namespace ComicManagerClean.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Character",
+                name: "Characters",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -25,7 +25,7 @@ namespace ComicManagerClean.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Character", x => x.Id);
+                    table.PrimaryKey("PK_Characters", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,9 +70,9 @@ namespace ComicManagerClean.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_CharacterComics", x => new { x.CharacterId, x.ComicId });
                     table.ForeignKey(
-                        name: "FK_CharacterComics_Character_CharacterId",
+                        name: "FK_CharacterComics_Characters_CharacterId",
                         column: x => x.CharacterId,
-                        principalTable: "Character",
+                        principalTable: "Characters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -99,7 +99,7 @@ namespace ComicManagerClean.Infrastructure.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Character");
+                name: "Characters");
 
             migrationBuilder.DropTable(
                 name: "Comics");

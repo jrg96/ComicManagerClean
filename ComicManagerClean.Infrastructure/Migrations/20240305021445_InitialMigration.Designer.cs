@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComicManagerClean.Infrastructure.Migrations
 {
     [DbContext(typeof(ComicManagerDbContext))]
-    [Migration("20240304224839_InitialMigration")]
+    [Migration("20240305021445_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -61,7 +61,7 @@ namespace ComicManagerClean.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Character");
+                    b.ToTable("Characters");
                 });
 
             modelBuilder.Entity("ComicManagerClean.Domain.Entities.CharacterComic", b =>

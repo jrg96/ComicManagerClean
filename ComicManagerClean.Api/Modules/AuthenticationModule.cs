@@ -25,15 +25,15 @@ public class AuthenticationModule : CarterModule
 
         v1.MapPost("/register", Register)
             .Accepts<SignUpRequest>("application/json")
-            .Produces<TaskResult<string>>(200)
-            .Produces<TaskResult<string>>(500)
-            .Produces<TaskResult<string>>(400);
+            .Produces<TaskResult>(200)
+            .Produces<TaskResult>(500)
+            .Produces<TaskResult>(400);
 
         v1.MapPost("/login", Login)
             .Accepts<AuthenticationRequest>("application/json")
             .Produces<TaskResult<string>>(200)
-            .Produces<TaskResult<string>>(500)
-            .Produces<TaskResult<string>>(400);
+            .Produces<TaskResult>(500)
+            .Produces<TaskResult>(400);
     }
 
     private RouteGroupBuilder CreateApiVersions(IEndpointRouteBuilder app)
@@ -64,19 +64,17 @@ public class AuthenticationModule : CarterModule
 
         if (!result.IsSuccess)
         {
-            return TypedResults.BadRequest(new TaskResult<string>()
+            return TypedResults.BadRequest(new TaskResult()
             {
                 Successful = false,
-                ErrorList = new List<string>() { result.Error.Message },
-                Data = string.Empty
+                ErrorList = new List<string>() { result.Error.Message }
             });
         }
 
-        return TypedResults.Ok(new TaskResult<string>()
+        return TypedResults.Ok(new TaskResult()
         {
             ErrorList = new List<string>(),
-            Successful = result.IsSuccess,
-            Data = "User registered successfully!"
+            Successful = result.IsSuccess
         });
     }
 
@@ -94,10 +92,9 @@ public class AuthenticationModule : CarterModule
         // If there was a failure, return Bad Request
         if (!result.IsSuccess)
         {
-            return TypedResults.BadRequest(new TaskResult<string>() {
+            return TypedResults.BadRequest(new TaskResult() {
                 Successful = false,
-                ErrorList = new List<string>() { result.Error.Message },
-                Data = string.Empty
+                ErrorList = new List<string>() { result.Error.Message }
             });
         }
 

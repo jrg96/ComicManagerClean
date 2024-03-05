@@ -14,14 +14,13 @@ public class CustomAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
         // Hanlde failures when RoleRequirement is used
         if (authorizeResult.Challenged && !authorizeResult.Succeeded && policy.Requirements.Any(req => req is RoleRequirement))
         {
-            TaskResult<string> result = new TaskResult<string>()
+            TaskResult result = new TaskResult()
             {
                 Successful = false,
                 ErrorList = new List<string>()
                 {
                     { "Unauthorized" }
-                },
-                Data = string.Empty,
+                }
             };
 
             context.Response.StatusCode = StatusCodes.Status403Forbidden;
