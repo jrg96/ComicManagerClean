@@ -19,6 +19,7 @@ public static class InfrastructureExtensions
         services.AddScoped<IUserQueryRepository, UserQueryRepository>();
 
         services.AddScoped<ICharacterCommandRepository, CharacterCommandRepository>();
+        services.AddScoped<ICharacterQueryRepository, CharacterQueryRepository>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IPasswordSecurityService, PasswordSecurityService>();
