@@ -14,6 +14,13 @@ public class UpdateCharacterCommandHandler : ICommandHandler<UpdateCharacterComm
     private readonly ICharacterQueryRepository _characterQueryRepository;
     private readonly IUnitOfWork _unitOfWork;
 
+    public UpdateCharacterCommandHandler(ICharacterCommandRepository characterCommandRepository, ICharacterQueryRepository characterQueryRepository, IUnitOfWork unitOfWork)
+    {
+        _characterCommandRepository = characterCommandRepository;
+        _characterQueryRepository = characterQueryRepository;
+        _unitOfWork = unitOfWork;
+    }
+
     public async Task<CommandResult> Handle(UpdateCharacterCommand request, CancellationToken cancellationToken)
     {
         // Check if character exists
@@ -24,8 +31,8 @@ public class UpdateCharacterCommandHandler : ICommandHandler<UpdateCharacterComm
             return new CommandResult(false, new Error("CM-03", "Character does not exist!"));
         }
 
-        Domain.Entities.Character updatedCharacter = request.Adapt<Domain.Entities.Character>();
-        await _characterCommandRepository.Update(updatedCharacter);
+        request.Adapt(existingCharacter);
+        await _characterCommandRepository.Update(existingCharacter);
         await _unitOfWork.SaveChangesAsync();
 
         return new CommandResult(true, Error.None);

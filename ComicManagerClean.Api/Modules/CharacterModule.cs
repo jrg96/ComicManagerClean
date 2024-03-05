@@ -22,6 +22,14 @@ public class CharacterModule : CarterModule
             .Produces<TaskResult>(400)
             .Produces<TaskResult>(500)
             .Produces<TaskResult>(403);
+
+        v1.MapPut("/", UpdateCharacter)
+            .RequireAuthorization("user_policy_requirement")
+            .Accepts<UpdateCharacterRequest>("application/json")
+            .Produces<TaskResult>(200)
+            .Produces<TaskResult>(400)
+            .Produces<TaskResult>(500)
+            .Produces<TaskResult>(403);
     }
 
     private RouteGroupBuilder CreateApiVersions(IEndpointRouteBuilder app)
@@ -63,6 +71,34 @@ public class CharacterModule : CarterModule
         return TypedResults.Ok(new TaskResult()
         {
             Successful = true
+        });
+    }
+
+    public async Task<IResult> UpdateCharacter(IMediator mediator, UpdateCharacterRequest request)
+    {
+        var result = await mediator.Send(new UpdateCharacterCommand(
+            request.Id
+            , request.HeroName
+            , request.FirstName
+            , request .LastName
+            , request .DateOfBirth
+            , request.CharacterType
+            , request.Deceased
+        ));
+
+        if (!result.IsSuccess)
+        {
+            return TypedResults.BadRequest(new TaskResult() 
+            {
+                Successful = false,
+                ErrorList = new List<string>() { result.Error.Message }
+            });
+        }
+
+        return TypedResults.Ok(new TaskResult() 
+        {
+            Successful = true,
+            ErrorList = new List<string>()
         });
     }
 }
