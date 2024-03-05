@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicManagerClean.Api", "ComicManagerClean.Api\ComicManagerClean.Api.csproj", "{6EAD93F4-EA52-4663-ADF4-08923C7B510A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicManagerClean.Contracts", "ComicManagerClean.Contracts\ComicManagerClean.Contracts.csproj", "{FE02E9F5-31D2-42DD-8DE3-3585137D3BDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicManagerClean.Contracts", "ComicManagerClean.Contracts\ComicManagerClean.Contracts.csproj", "{FE02E9F5-31D2-42DD-8DE3-3585137D3BDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicManagerClean.Domain.Shared", "ComicManagerClean.Domain.Shared\ComicManagerClean.Domain.Shared.csproj", "{CD3D64BB-04A0-4C52-82EE-2220E23F58D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{FE02E9F5-31D2-42DD-8DE3-3585137D3BDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE02E9F5-31D2-42DD-8DE3-3585137D3BDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE02E9F5-31D2-42DD-8DE3-3585137D3BDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD3D64BB-04A0-4C52-82EE-2220E23F58D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD3D64BB-04A0-4C52-82EE-2220E23F58D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD3D64BB-04A0-4C52-82EE-2220E23F58D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD3D64BB-04A0-4C52-82EE-2220E23F58D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

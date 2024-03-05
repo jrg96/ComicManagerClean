@@ -11,4 +11,8 @@
     <Folder Include="Aggregates\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ComicManagerClean.Domain.Shared\ComicManagerClean.Domain.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

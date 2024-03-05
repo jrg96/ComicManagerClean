@@ -1,4 +1,5 @@
 ﻿using ComicManagerClean.Domain.Shared.Enums;
+
 namespace ComicManagerClean.Domain.Entities;
 
 public class Character
