@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Aggregates\" />
+    <Folder Include="Common\ValueObjects\" />
   </ItemGroup>
 
   <ItemGroup>
