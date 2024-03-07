@@ -6,6 +6,9 @@ using ComicManagerClean.Contracts.Character;
 using ComicManagerClean.Application.Character.Commands;
 using ComicManagerClean.Contracts.Common;
 using Microsoft.AspNetCore.Mvc;
+using ComicManagerClean.Application.Character.Queries;
+using Mapster;
+using ComicManagerClean.Contracts.DTO.Character;
 
 namespace ComicManagerClean.Api.Modules;
 
@@ -35,6 +38,13 @@ public class CharacterModule : CarterModule
         v1.MapDelete("/{characterId:guid}", DeleteCharacter)
             .RequireAuthorization("user_policy_requirement")
             .Produces<TaskResult>(200)
+            .Produces<TaskResult>(400)
+            .Produces<TaskResult>(500)
+            .Produces<TaskResult>(403);
+
+        v1.MapPost("/list", GetCharacterListByFilter)
+            .RequireAuthorization("user_policy_requirement")
+            .Produces<TaskResult<GetCharacterListByFilterResponse>>(200)
             .Produces<TaskResult>(400)
             .Produces<TaskResult>(500)
             .Produces<TaskResult>(403);
@@ -127,6 +137,33 @@ public class CharacterModule : CarterModule
         {
             Successful = true,
             ErrorList = new List<string>()
+        });
+    }
+
+    public async Task<IResult> GetCharacterListByFilter(IMediator mediator, GetCharacterListByFilterRequest request)
+    {
+        var result = await mediator.Send(new GetCharactersByFilterQuery(request.Pagination));
+
+        if (!result.IsSuccess)
+        {
+            return TypedResults.BadRequest(new TaskResult() 
+            {
+                Successful = false,
+                ErrorList = new List<string>() { result.Error.Message }
+            });
+        }
+
+        return TypedResults.Ok(new TaskResult<GetCharacterListByFilterResponse>()
+        {
+            Successful = true,
+            ErrorList = new List<string>(),
+            Data = new GetCharacterListByFilterResponse()
+            {
+                TotalCount = result.Value.TotalCount,
+                Data = result.Value.Data
+                    .Select(character => character.Adapt<CharacterDto>())
+                    .ToList()
+            }
         });
     }
 }
