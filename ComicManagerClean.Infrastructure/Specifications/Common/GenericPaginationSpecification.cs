@@ -9,9 +9,16 @@ public abstract class GenericPaginationSpecification<T> : Specification<T> where
     protected ISpecificationBuilder<T> Builder { get; set; }
     protected Dictionary<string, Expression<Func<T, object?>>> OrderFunctions { get; set; }
 
-    protected GenericPaginationSpecification(PaginationCriteria paginationCriteria, Dictionary<string, Expression<Func<T, object?>>> orderFunctions)
+    protected GenericPaginationSpecification(PaginationCriteria paginationCriteria, Dictionary<string, Expression<Func<T, object?>>> orderFunctions, bool countScenario = false)
     {
         OrderFunctions = orderFunctions;
+
+        // If this is a count scenario, do not execute pagination functions
+        if (countScenario)
+        {
+            Builder = Query;
+            return;
+        }
 
         // Apply Pagination
         Builder = Query

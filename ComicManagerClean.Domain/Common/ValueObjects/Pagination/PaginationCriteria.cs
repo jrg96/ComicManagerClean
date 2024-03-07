@@ -6,4 +6,5 @@ public class PaginationCriteria
     public int Size { get; set; }
     public string SortBy { get; set; }
     public bool Ascending { get; set; }
+    public string SearchString { get; set; }
 }

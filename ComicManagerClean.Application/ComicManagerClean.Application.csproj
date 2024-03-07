@@ -20,8 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Character\QueryHandlers\" />
-    <Folder Include="Character\Queries\" />
     <Folder Include="User\QueryHandlers\" />
     <Folder Include="User\Queries\" />
   </ItemGroup>
