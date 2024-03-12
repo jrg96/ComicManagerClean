@@ -1,8 +1,6 @@
 ﻿using Asp.Versioning;
 using Asp.Versioning.Builder;
 using Carter;
-using ComicManagerClean.Application.Character.Commands;
-using ComicManagerClean.Application.Comic.Commands;
 using ComicManagerClean.Application.User.Commands;
 using ComicManagerClean.Contracts.Authentication;
 using ComicManagerClean.Contracts.Common;
