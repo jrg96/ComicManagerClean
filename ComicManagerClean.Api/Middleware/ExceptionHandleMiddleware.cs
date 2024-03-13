@@ -51,7 +51,7 @@ public class ExceptionHandleMiddleware
         {
             Successful = false,
             ErrorList = errors
-        }) ;
+        });
     }
 }
 
