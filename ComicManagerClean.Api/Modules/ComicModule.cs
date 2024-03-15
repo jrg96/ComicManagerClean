@@ -5,6 +5,7 @@ using MediatR;
 using ComicManagerClean.Application.Comic.Commands;
 using ComicManagerClean.Contracts.Comic;
 using ComicManagerClean.Contracts.Common;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ComicManagerClean.Api.Modules;
 
@@ -26,6 +27,13 @@ public class ComicModule : CarterModule
         v1.MapPut("/", UpdateComic)
             .RequireAuthorization("user_policy_requirement")
             .Accepts<UpdateComicRequest>("application/json")
+            .Produces<TaskResult>(200)
+            .Produces<TaskResult>(400)
+            .Produces<TaskResult>(500)
+            .Produces<TaskResult>(403);
+
+        v1.MapDelete("/{comicId:guid}", DeleteComic)
+            .RequireAuthorization("user_policy_requirement")
             .Produces<TaskResult>(200)
             .Produces<TaskResult>(400)
             .Produces<TaskResult>(500)
@@ -93,6 +101,26 @@ public class ComicModule : CarterModule
         }
 
         return TypedResults.Ok(new TaskResult() 
+        {
+            Successful = true,
+            ErrorList = new List<string>() { }
+        });
+    }
+
+    private async Task<IResult> DeleteComic(IMediator mediator, [FromRoute] Guid comicId)
+    {
+        var result = await mediator.Send(new DeleteComicCommand(comicId));
+
+        if (!result.IsSuccess) 
+        {
+            return TypedResults.BadRequest(new TaskResult()
+            {
+                Successful = false,
+                ErrorList = new List<string>() { result.Error.Message }
+            });
+        }
+
+        return TypedResults.Ok(new TaskResult()
         {
             Successful = true,
             ErrorList = new List<string>() { }
