@@ -22,6 +22,14 @@ public class ComicModule : CarterModule
             .Produces<TaskResult>(400)
             .Produces<TaskResult>(500)
             .Produces<TaskResult>(403);
+
+        v1.MapPut("/", UpdateComic)
+            .RequireAuthorization("user_policy_requirement")
+            .Accepts<UpdateComicRequest>("application/json")
+            .Produces<TaskResult>(200)
+            .Produces<TaskResult>(400)
+            .Produces<TaskResult>(500)
+            .Produces<TaskResult>(403);
     }
 
     private RouteGroupBuilder CreateApiVersions(IEndpointRouteBuilder app)
@@ -64,5 +72,30 @@ public class ComicModule : CarterModule
                 ErrorList = new List<string>() { }
             }
         );
+    }
+
+    public async Task<IResult> UpdateComic(IMediator mediator, UpdateComicRequest request)
+    {
+        var result = await mediator.Send(new UpdateComicCommand(
+            request.Id,
+            request.Name,
+            request.ReleaseDate,
+            request.Chapters
+        ));
+
+        if (!result.IsSuccess)
+        {
+            return TypedResults.BadRequest(new TaskResult() 
+            {
+                Successful = false,
+                ErrorList = new List<string>() { result.Error.Message }
+            });
+        }
+
+        return TypedResults.Ok(new TaskResult() 
+        {
+            Successful = true,
+            ErrorList = new List<string>() { }
+        });
     }
 }
